@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+
+	<PropertyGroup>
+		<Configurations>Debug;Release</Configurations>
+		<TargetFramework>net8.0</TargetFramework>
+		<OutputType>Library</OutputType>
+		<PlatformTarget>x64</PlatformTarget>
+		<Platforms>x64</Platforms>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<!--<AllowUnsafeBlocks>True</AllowUnsafeBlocks>-->
+		<CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+		<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+		<Deterministic>true</Deterministic>
+	</PropertyGroup>
+
+	<!--<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
+		<Deterministic>true</Deterministic>
+	</PropertyGroup>-->
+
+	<ItemGroup>
+		<Reference Include="Lib\*.dll">
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+
+	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Games\steamapps\common\MonsterHunterWilds\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
+		<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Projects\REFramework\MHWilds_DisablePostProcessingEffects\MHWilds_DisablePostProcessingEffects\Lib\&quot; /s /i /y" />
+		<Exec Condition="'$(Configuration)' == 'Release'" Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Projects\REFramework\Releases\REFrameworkNetPlugin\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
+	</Target>-->
+
+
+</Project>
