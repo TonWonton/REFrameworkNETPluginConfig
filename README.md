@@ -1,11 +1,11 @@
 # REFrameworkNETPluginConfig
 
 ## Description
-REFramework config dependency/library for the REFramework C# API. Add config settings to a plugin that can be serialized to and loaded from JSON.
+REFrameworkNETPluginConfig config plugin/dependency/library for the REFramework C# API. Add config settings to a plugin that can be serialized to and loaded from JSON.
 Can be used as a separate .dll dependency (placed in `\GAME_FOLDER\reframework\plugins\managed\dependencies\`) or embedded in a different plugin together in a single .dll file.
 
 ## Prerequisites
-- REFramework and the REFramework C# API (csharp-api) [GitHub REFramework-nightly releases](https://github.com/praydog/REFramework-nightly/releases)
+- REFramework and the REFramework C# API [GitHub REFramework-nightly releases](https://github.com/praydog/REFramework-nightly/releases)
 
 ## Features
 - Add config entries easily
@@ -69,5 +69,4 @@ public static void PreImGuiDrawUI()
 		ImGui.TreePop();
 	}
 }
-
 ```

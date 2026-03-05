@@ -3,7 +3,7 @@
 
 	<PropertyGroup>
 		<Configurations>Debug;Release</Configurations>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<OutputType>Library</OutputType>
 		<PlatformTarget>x64</PlatformTarget>
 		<Platforms>x64</Platforms>
@@ -14,10 +14,11 @@
 		<Deterministic>true</Deterministic>
 	</PropertyGroup>
 
-	<!--<PropertyGroup Condition="'$(Configuration)' == 'Release'">
-		<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>
-		<Deterministic>true</Deterministic>
-	</PropertyGroup>-->
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<!--<PathMap>$(MSBuildProjectDirectory)=$(MSBuildProjectName)</PathMap>-->
+		<!--<Deterministic>true</Deterministic>-->
+	</PropertyGroup>
 
 	<ItemGroup>
 		<Reference Include="Lib\*.dll">
@@ -26,11 +27,12 @@
 	</ItemGroup>
 
 
-	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Games\steamapps\common\MonsterHunterWilds\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
-		<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Projects\REFramework\MHWilds_DisablePostProcessingEffects\MHWilds_DisablePostProcessingEffects\Lib\&quot; /s /i /y" />
-		<Exec Condition="'$(Configuration)' == 'Release'" Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Projects\REFramework\Releases\REFrameworkNetPlugin\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
-	</Target>-->
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!--<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Games\steamapps\common\RESIDENT EVIL requiem BIOHAZARD requiem\reframework\plugins\managed\dependencies\&quot; /s /i /y" />-->
+		<!--<Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;D:\Projects\REFramework\MHWilds_DisablePostProcessingEffects\MHWilds_DisablePostProcessingEffects\Lib\&quot; /s /i /y" />-->
+		<Exec Condition="'$(Configuration)' == 'Release'" Command="xcopy &quot;$(TargetPath)&quot; &quot;$(MSBuildProjectDirectory)\..\Releases\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
+		<Exec Condition="'$(Configuration)' == 'Release'" Command="xcopy &quot;$(TargetDir)$(TargetName).xml&quot; &quot;$(MSBuildProjectDirectory)\..\Releases\reframework\plugins\managed\dependencies\&quot; /s /i /y" />
+	</Target>
 
 
 </Project>

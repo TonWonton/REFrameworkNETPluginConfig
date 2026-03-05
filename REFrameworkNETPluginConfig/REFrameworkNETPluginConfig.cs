@@ -24,7 +24,7 @@ namespace REFrameworkNETPluginConfig
 		internal const string PLUGIN_NAME = "REFrameworkNETPluginConfig";
 		internal const string COPYRIGHT = "";
 		internal const string COMPANY = "https://github.com/TonWonton/REFrameworkNETPluginConfig";
-		internal const string VERSION = "1.0.0";
+		internal const string VERSION = "1.1.0";
 
 		//File path
 		public static readonly string rootFolder = Path.GetDirectoryName(Environment.ProcessPath) ?? Directory.GetCurrentDirectory(); //Replace with correct directory lookup and folder names if needed
@@ -209,7 +209,7 @@ namespace REFrameworkNETPluginConfig
 				{
 					try
 					{
-						if (entry.TryGetJsonTypeInfo(out _) == false) continue; //Skip unserializable entries
+						if (entry.TryGetJsonTypeInfo(out JsonTypeInfo? jsonTypeInfo) == false) continue; //Skip unserializable entries
 
 						JsonNode? jsonNode = entry.ConfigValue;
 						jsonObject[key] = jsonNode;
@@ -285,9 +285,9 @@ namespace REFrameworkNETPluginConfig
 
 
 #if EMBEDDED_SOURCE
-	internal class ConfigEntry<T> : ConfigEntryBase
+	internal sealed class ConfigEntry<T> : ConfigEntryBase
 #else
-	public class ConfigEntry<T> : ConfigEntryBase
+	public sealed class ConfigEntry<T> : ConfigEntryBase
 #endif
 	{
 		/* VARIABLES */
@@ -344,7 +344,7 @@ namespace REFrameworkNETPluginConfig
 
 		/* EVENT */
 		/// <summary>Invoked on <c>Set(T newValue)</c>, <c>Reset()</c>, and <c>NotifyValueChanged()</c>, but not on the silent methods or the <c>ConfigValue</c> setter.</summary>
-		public event Action? ValueChanged;
+		public override event Action? ValueChanged;
 		/// <summary>Invoked on <c>Set(T newValue)</c>, <c>Reset()</c>, and <c>NotifyValueChanged()</c>, but not on the silent methods or the <c>ConfigValue</c> setter.</summary>
 		public event Action<T>? ValueChangedT;
 
@@ -357,12 +357,12 @@ namespace REFrameworkNETPluginConfig
 		public void SetSilent(T newValue) { _value = newValue; }
 
 		/// <summary>Sets <c>_value</c> to <c>_defaultValue</c> and invokes the <c>ValueChanged</c> events.</summary>
-		public void Reset() { _value = _defaultValue; NotifyValueChanged(); }
+		public override void Reset() { _value = _defaultValue; NotifyValueChanged(); }
 		/// <summary>Sets <c>_value</c> to <c>_defaultValue</c> without invoking the <c>ValueChanged</c> events.</summary>
-		public void ResetSilent() { _value = _defaultValue; }
+		public override void ResetSilent() { _value = _defaultValue; }
 
 		/// <summary>Invokes the <c>ValueChanged</c> events.</summary>
-		public void NotifyValueChanged()
+		public override void NotifyValueChanged()
 		{
 			var valueChanged = ValueChanged;
 			var valueChangedT = ValueChangedT;
@@ -399,6 +399,8 @@ namespace REFrameworkNETPluginConfig
 		public JsonTypeInfo? JsonTypeInfo { get { return _jsonTypeInfo; } }
 		public abstract JsonNode? ConfigValue { get; set; }
 
+		public abstract event Action? ValueChanged;
+
 
 
 		/* METHODS */
@@ -410,6 +412,10 @@ namespace REFrameworkNETPluginConfig
 			jsonTypeInfo = _jsonTypeInfo;
 			return _jsonTypeInfo != null;
 		}
+
+		public abstract void Reset();
+		public abstract void ResetSilent();
+		public abstract void NotifyValueChanged();
 
 
 
