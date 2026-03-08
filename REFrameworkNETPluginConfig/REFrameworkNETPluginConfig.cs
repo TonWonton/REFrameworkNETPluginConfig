@@ -24,7 +24,7 @@ namespace REFrameworkNETPluginConfig
 		internal const string PLUGIN_NAME = "REFrameworkNETPluginConfig";
 		internal const string COPYRIGHT = "";
 		internal const string COMPANY = "https://github.com/TonWonton/REFrameworkNETPluginConfig";
-		internal const string VERSION = "1.1.0";
+		internal const string VERSION = "1.2.0";
 
 		//File path
 		public static readonly string rootFolder = Path.GetDirectoryName(Environment.ProcessPath) ?? Directory.GetCurrentDirectory(); //Replace with correct directory lookup and folder names if needed
@@ -171,9 +171,9 @@ namespace REFrameworkNETPluginConfig
 			return entry;
 		}
 
-		 /// <summary>
-		 /// Adds an existing ConfigEntryBase which will be serialized if possible. Overwrites existing entry if it exists, and does not unregister events.
-		 /// </summary>
+		/// <summary>
+		/// Adds an existing ConfigEntryBase which will be serialized if possible. Overwrites existing entry if it exists, and does not unregister events.
+		/// </summary>
 		public void Add(string key, ConfigEntryBase configEntry)
 		{
 			_configEntries.AddOrUpdate(key, configEntry, (_, _) => configEntry);
@@ -294,8 +294,11 @@ namespace REFrameworkNETPluginConfig
 		private T _value;
 		private T _defaultValue;
 
+		/// <summary>Returns <c>_value</c>.</summary>
 		public T Value { get { return _value; } }
+		/// <summary>Returns <c>_defaultValue</c>.</summary>
 		public T DefaultValue { get { return _defaultValue; } }
+		/// <summary>Returns <c>ref _value</c>.</summary> 
 		public ref T RefValue { get { return ref _value; } }
 
 		/// <summary>
@@ -351,6 +354,11 @@ namespace REFrameworkNETPluginConfig
 
 
 		/* METHODS */
+		/// <summary>Assigns <c>_value</c> to the out parameter.</summary>
+		public void GetValue(out T value) { value = _value; }
+		/// <summary>Assigns <c>_defaultValue</c> to the out parameter.</summary>
+		public void GetDefaultValue(out T defaultValue) { defaultValue = _defaultValue; }
+
 		/// <summary>Sets <c>_value</c> and invokes the <c>ValueChanged</c> events.</summary>
 		public void Set(T newValue) { _value = newValue; NotifyValueChanged(); }
 		/// <summary>Sets <c>_value</c> without invoking the <c>ValueChanged</c> events.</summary>
