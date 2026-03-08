@@ -22,6 +22,10 @@ Can be used as a separate .dll dependency (placed in `\GAME_FOLDER\reframework\p
   - Reference the .dll dependency (end user has to install the .dll dependency as well)
   - Reference the .cs source and bundle it in a single .dll (compile with constant `EMBEDDED_SOURCE`)
 
+### Examples of plugins using this
+- RE9_CustomCameraFOV https://github.com/TonWonton/RE9_CustomCameraFOV
+- RE9_DisablePostProcessingEffects https://github.com/TonWonton/RE9_DisablePostProcessingEffects
+
 ### Example usage
 ```csharp
 namespace MHWilds_DisablePostProcessingEffects
@@ -34,13 +38,12 @@ namespace MHWilds_DisablePostProcessingEffects
 		private static Config _config = new Config(GUID);
 
 		//2. Declare config variables
-		private static ConfigEntry<bool> _colorCorrect = null!;
+		private static ConfigEntry<bool> _colorCorrect = _config.Add("Color correction", true); //Parameters are (string key, T defaultValue);
 
 		//3. Initialize config
 		[PluginEntryPoint]
 		protected static void Load()
 		{
-			_colorCorrect = _config.Add("Color correction", true); //Parameters are (string key, T defaultValue)
 			_colorCorrect.ValueChanged += ApplySettings; //Register event if needed
 
 			//4. Save to or load from JSON
