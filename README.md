@@ -25,6 +25,7 @@ Can be used as a separate .dll dependency (placed in `\GAME_FOLDER\reframework\p
 ### Examples of plugins using this
 - RE9_CustomCameraFOV https://github.com/TonWonton/RE9_CustomCameraFOV
 - RE9_DisablePostProcessingEffects https://github.com/TonWonton/RE9_DisablePostProcessingEffects
+- RE9_ScopeResolutionFix https://github.com/TonWonton/RE9_ScopeResolutionFix
 
 ### Example usage
 ```csharp
@@ -72,4 +73,5 @@ public static void PreImGuiDrawUI()
 		ImGui.TreePop();
 	}
 }
+
 ```
