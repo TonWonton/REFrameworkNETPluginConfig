@@ -1,3 +1,6 @@
+### v1.2.0-1
+- Add Utility/ImGuiF
+
 ### v1.2.0
 - Add GetValue methods
 
