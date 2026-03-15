@@ -26,6 +26,8 @@ Can be used as a separate .dll dependency (placed in `\GAME_FOLDER\reframework\p
 - RE9_CustomCameraFOV https://github.com/TonWonton/RE9_CustomCameraFOV
 - RE9_DisablePostProcessingEffects https://github.com/TonWonton/RE9_DisablePostProcessingEffects
 - RE9_ScopeResolutionFix https://github.com/TonWonton/RE9_ScopeResolutionFix
+- RE2_DisableAdaptiveDifficulty https://github.com/TonWonton/RE2_DisableAdaptiveDifficulty
+- RE2_DisableSharpeningAndTAA https://github.com/TonWonton/RE2_DisableSharpeningAndTAA
 
 ### Example usage
 ```csharp
